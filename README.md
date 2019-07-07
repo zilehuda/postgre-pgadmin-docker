@@ -28,5 +28,10 @@ This Compose file contains the following environment variables:
 * **Username:** zilehuda@wzone.io (as a default)
 * **Password:** wzone.io (as a default)
 
+## Default Ports: 
 * The default port for postgres is **5432**
 * The default port for pgadmin is **444**
+
+## FAQ: 
+* What is postgres container server addess ? 
+use command: **docker inspect {container-id} | grep "IPAddress** to get container IP that you need to use in `SERVER` field in pgadmin
