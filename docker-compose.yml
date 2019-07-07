@@ -1,0 +1,44 @@
+version: '3.5'
+
+services:
+  postgres:
+    container_name: postgres_db
+    image: postgres
+    environment:
+      POSTGRES_DB: ecomplianceDB
+      POSTGRES_USER: zilehuda
+      POSTGRES_PASSWORD: wzone.io
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5435:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: postgres_pg_admin
+    image: dpage/pgadmin4
+    # command: go run main.go
+    volumes:
+      # - ./pgadmin_docker_volume:/var/lib/pgadmin
+      - pgadmin:/root/.pgadmin
+    ports:
+      - "444:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: zilehuda@wzone.io
+      PGADMIN_DEFAULT_PASSWORD: wzone.io
+      PORT: 444
+    networks:
+      - postgres
+    restart: unless-stopped
+
+networks:
+  postgres:
+    name: postges-pgadmin-network
+    driver: bridge
+
+volumes:
+    postgres:
+    pgadmin:
